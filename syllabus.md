@@ -1,4 +1,4 @@
-# IGME-206, Game Development for Programmers, Fall 2021: Syllabus
+# IGME-206-2211, Game Development for Programmers, Fall 2021: Syllabus
 
 ## Course Catalog Description
 
@@ -13,7 +13,7 @@
 - Email: dxsigm@rit.edu
 - Student hours: Wed 6-8pm, anytime on Slack and myCourses "Help Dropbox" in Assignments
 - Class meeting:
-    - Tues,Thurs 3:30PM - 4:45PM ET at https://rit.zoom.us/j/93207929493
+    - Tues,Thurs 3:30PM - 4:45PM ET at https://rit.zoom.us/j/96542226880
     - All lectures will be recorded and available via links which will be posted in the "Announcement" channel on Slack and myCourses
 - Weekly Lab: there will be weekly lab exercises provided as ~1 hour instructive videos with required project submissions
 
@@ -29,11 +29,11 @@ We will assess all of this work with in-class exercises, homework, projects, and
 
 ## Course Structure
 - Unit 1 (weeks 1-3): C# Syntax and Procedural Programming (textbook chapters 1-6)
-- In-class Project Presentations End of Week 4
+- In-class Project Presentations End of Week 4 (Sept 16th)
 - Unit 2 (weeks 4-6): Object Oriented Programming (textbook chapters 8-11, pdf and ppt documents, schUML documentation)
 - Unit 3 (weeks 7-12): Data Structures (pdf and ppt documents)
 - Unit 4 (weeks 13-15): Data Oriented Programming (pdf and ppt documents)
-- In-class Final Project Presentations Last Lecture in Week 15
+- In-class Final Project Presentations Last Lecture in Week 15 (Dec 2nd)
 
 ## Course Materials and Communication
 _Beginning C#_ by Karli Watson, et al.
@@ -59,7 +59,7 @@ Final course grades are determined using the following scale:
 | <65%	| F |
 
 ### Project (25%)
--	A Unity-based game to be demonstrated during the final class on Nov X, 2021.  Final submission due the last day of finals.
+-	A Unity-based game to be demonstrated during the final class on Dec 2nd, 2021.  Final submission due the last day of finals.
 
 ### Exams (40%)
 These take-home exams, for which you will have at least 9 days to complete, consist of all manner of question styles (multiple choice, true/false, matching, etc) as well as "write some code" questions. There will be no make-ups or re-takes allowed without prior permission.
@@ -85,8 +85,8 @@ Incomplete grades will be given only in the most exceptional circumstances, sole
 The course policy on academic dishonesty is simple: If you get caught cheating or plagiarizing, you get an "F" as a grade for the course, a letter detailing the incident goes into your records folder, and you are immediately removed from the class. (If this is a second occurrence during your career at RIT, the penalties are harsher.) Please review RIT's policy on academic dishonesty: http://www.rit.edu/~w-policy/sectionD/D8.html
 
 ## Important RIT Deadlines
--	Last day of add/drop is Wednesday, August X, 2021.
--	Last day to withdraw with a grade of "W" is Tuesday, November X, 2021.
+-	Last day of add/drop is Wednesday, August 30th, 2021.
+-	Last day to withdraw with a grade of "W" is Tuesday, November 5th, 2021.
 -	You have one semester after the class has ended to challenge your grade.
 
 ## Notices of Accommodation
