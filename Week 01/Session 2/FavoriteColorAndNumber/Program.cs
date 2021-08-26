@@ -12,12 +12,37 @@ namespace FavoriteColorAndNumber
     // Restrictions: None
     static class Program
     {
-
-        static void PrintMyColor(ref string sColorString)
+        // Method: PrintMyColor
+        // Purpose: Demonstrate passing variables "by value" and "by reference"
+        // Restrictions: None
+        // without the "ref" keyword, the variable is passed according to the default behavior
+        // the primitive data types all behave as "by value" variables by default
+        static void PrintMyColor(string sColorString)
         {
+            // sColorString is a local string variable to this method
+            // which will receive a copy of the passed variable from the calling method
+            // append " is your favorite color" to sColorString, which will not change the variable in the calling method
+            // note that a += b is the same as a = a + b
             sColorString += " is your favorite color";
             Console.WriteLine(sColorString);
         }
+
+        // Method: PrintMyColorByReference
+        // Purpose: Demonstrate passing variables "by value" and "by reference"
+        // Restrictions: None
+        // adding the "ref" keyword, the variable is passed according to the default behavior
+        // the primitive data types all behave as "by value" variables by default
+        static void PrintMyColorByReference(ref string sColorString)
+        {
+            // sColorString is a local string variable to this method
+            // but it is a reference to the passed variable from the calling method
+            // which means any changes to sColorString will change the variable in the calling method
+            // append " is your favorite color" to sColorString, which WILL change the variable in the calling method
+            // note that a += b is the same as a = a + b
+            sColorString += " is your favorite color";
+            Console.WriteLine(sColorString);
+        }
+
 
         // Method: Main
         // Purpose: Prompt the user for their favorite color and number
@@ -34,15 +59,24 @@ namespace FavoriteColorAndNumber
             string sDavesColor = null;
             string sTomsColor = null;
 
+            // strings are "by value" data types so that changes to one do not affect the others
             sDavesColor = "red";
             sTomsColor = "blue";
+            
+            // even when we set one equal to another
             sDavesColor = sTomsColor;
+
+            // sDavesColor does not change
             sTomsColor = "purple";
 
-            { 
-                int localInt = 0;
 
+            {
+                // variables only exist in the code block they are defined in
+                int localInt = 0;
             }
+
+            // localInt no longer exists here!
+
 
             // int to hold their favorite number
             int favNum = 0;
@@ -64,7 +98,16 @@ namespace FavoriteColorAndNumber
             // sNumber = Console.ReadLine();
             sColor = Console.ReadLine();
 
-             PrintMyColor(ref sColor);
+            // call PrintMyColor with the default by value/by reference behavior of sColor
+            // sColor is a primitive data type (string) so by default it is "by value" and
+            // a separate copy of it will be created in PrintMyColor() so that sColor will not be changed
+            // by the method
+            PrintMyColor(sColor);
+
+            // force sColor to be passed by reference by using the "ref" keyword
+            // the method variable will be a reference to sColor and any changes to the method
+            // variable will change sColor (it is a shared variable because it was passed by reference)
+            PrintMyColorByReference(ref sColor);
 
             // prompt for favorite number
             Console.Write("Enter your favorite number:\t");
@@ -73,6 +116,7 @@ namespace FavoriteColorAndNumber
             // this causes a run-time error with non-numeric string
             //favNum = Convert.ToInt32(sNumber);
 
+            // while loop checks the condition before executing its code block
             while (!bValid)
             {
                 try
@@ -91,6 +135,7 @@ namespace FavoriteColorAndNumber
                 }
             }
 
+            // the do...while loop always executes its code block at least once
             //do
             //{
             //    try
