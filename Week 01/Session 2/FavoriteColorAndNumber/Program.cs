@@ -30,8 +30,8 @@ namespace FavoriteColorAndNumber
         // Method: PrintMyColorByReference
         // Purpose: Demonstrate passing variables "by value" and "by reference"
         // Restrictions: None
-        // adding the "ref" keyword, the variable is passed according to the default behavior
-        // the primitive data types all behave as "by value" variables by default
+        // adding the "ref" keyword, the variable is passed "by reference" and the local
+        // method variable sColorString will be a pointer or reference to the passed variable in the calling method
         static void PrintMyColorByReference(ref string sColorString)
         {
             // sColorString is a local string variable to this method
