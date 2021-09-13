@@ -120,6 +120,8 @@ namespace formula_arrays
                     }
                 }
 
+                nX = 0;
+
                 // loop through each value of x, increment the int nX after each loop
                 for (x = -4; x <= 4; x += 0.1, ++nX)
                 {
@@ -190,7 +192,7 @@ namespace formula_arrays
                         zArray[dataPointCntr++] = thisDataPoint;
 
                         // or we simply could have written
-                        zArray[dataPointCntr++] = new ZFunction(x, y);
+                        //zArray[dataPointCntr++] = new ZFunction(x, y);
                     }
                 }
             }
