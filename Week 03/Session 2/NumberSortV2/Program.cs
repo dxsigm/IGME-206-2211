@@ -9,13 +9,13 @@ namespace NumberSortV2
     class Program
     {
         // define the delegate method data type based on the common method signature of the possible methods to call
-        delegate int LowHighFunction(int[] a);
+        delegate double LowHighFunction(double[] a);
 
         static void Main(string[] args)
         {
             // declare the unsorted and sorted arrays
-            int[] aUnsorted;
-            int[] aSorted;
+            double[] aUnsorted;
+            double[] aSorted;
 
         // a label to allow us to easily loop back to the start if there are input issues
         start:
@@ -30,8 +30,8 @@ namespace NumberSortV2
             // initialize the size of the unsorted array to 0
             int nUnsortedLength = 0;
 
-            // a int used for parsing the current array element
-            int nThisNumber;
+            // a double used for parsing the current array element
+            double nThisNumber;
 
             // iterate through the array of number strings
             foreach (string sThisNumber in sNumbers)
@@ -46,7 +46,7 @@ namespace NumberSortV2
                 try
                 {
                     // try to parse the current string into a double
-                    nThisNumber = int.Parse(sThisNumber);
+                    nThisNumber = double.Parse(sThisNumber);
 
                     // if it's successful, increment the number of unsorted numbers
                     ++nUnsortedLength;
@@ -64,7 +64,7 @@ namespace NumberSortV2
 
             // now we know how many unsorted numbers there are
             // allocate the size of the unsorted array
-            aUnsorted = new int[nUnsortedLength];
+            aUnsorted = new double[nUnsortedLength];
 
             // reset nUnsortedLength back to 0 to use as the index to store the numbers in the unsorted array
             nUnsortedLength = 0;
@@ -77,7 +77,7 @@ namespace NumberSortV2
                 }
 
                 // parse it into a int (we know they are all valid now)
-                nThisNumber = int.Parse(sThisNumber);
+                nThisNumber = double.Parse(sThisNumber);
 
                 // store the value into the array
                 aUnsorted[nUnsortedLength] = nThisNumber;
@@ -108,7 +108,7 @@ namespace NumberSortV2
             }
 
             // allocate the size of the sorted array
-            aSorted = new int[nUnsortedLength];
+            aSorted = new double[nUnsortedLength];
 
             // start the sorted length at 0 to use as sorted index element
             int nSortedLength = 0;
@@ -138,17 +138,17 @@ namespace NumberSortV2
         }
 
         // find the lowest value in the array of ints
-        static int FindLowestValue(int[] array)
+        static double FindLowestValue(double[] array)
         {
             // define return value
-            int returnVal;
+            double returnVal;
 
             // initialize to the first element in the array
             // (we must initialize to an array element)
             returnVal = array[0];
 
             // loop through the array
-            foreach (int thisNum in array)
+            foreach (double thisNum in array)
             {
                 // if the current value is less than the saved lowest value
                 if (thisNum < returnVal)
@@ -163,17 +163,17 @@ namespace NumberSortV2
         }
 
         // find the highest value in the array of ints
-        static int FindHighestValue(int[] array)
+        static double FindHighestValue(double[] array)
         {
             // define return value
-            int returnVal;
+            double returnVal;
 
             // initialize to the first element in the array
             // (we must initialize to an array element)
             returnVal = array[0];
 
             // loop through the array
-            foreach (int thisNum in array)
+            foreach (double thisNum in array)
             {
                 // if the current value is greater than the saved lowest value
                 if (thisNum > returnVal)
@@ -188,10 +188,10 @@ namespace NumberSortV2
         }
 
         // remove the first instance of a value from an array
-        static void RemoveUnsortedValue(int removeValue, ref int[] array)
+        static void RemoveUnsortedValue(double removeValue, ref double[] array)
         {
             // allocate a new array to hold 1 less value than the source array
-            int[] newArray = new int[array.Length - 1];
+            double[] newArray = new double[array.Length - 1];
 
             // we need a separate counter to index into the new array, 
             // since we are skipping a value in the source array
@@ -201,7 +201,7 @@ namespace NumberSortV2
             bool bAlreadyRemoved = false;
 
             // iterate through the source array
-            foreach (int srcNumber in array)
+            foreach (double srcNumber in array)
             {
                 // if this is the number to be removed and we didn't remove it yet
                 if (srcNumber == removeValue && !bAlreadyRemoved)
