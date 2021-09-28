@@ -173,16 +173,36 @@ namespace schUMLExample
 
             Blood blood = new Blood();
 
+            ///////////////////////////////////
+            ///  Polymorphism examples
+            // we can declare a variable of type IDrawObject
             IDrawObject drawObject;
 
-            drawObject = circle;
+            // reference it to a Sphere object
+            drawObject = sphere;
+
+            // then call the Sphere's DrawMe() method
             drawObject.DrawMe();
 
+            // then set it to a Blood object
             drawObject = blood;
+
+            // and call the Blood's DrawMe() method
             drawObject.DrawMe();
 
-            DrawObject(circle);
+            // or we can have one function which accepts
+            // the IDrawObject type and calls the DrawMe() method for the object passed in
+            // Draw the Sphere object
+            DrawObject(sphere);
+
+            // Draw some blood!
             DrawObject(blood);
+
+            // Call the overridden Area() method for each Shape object
+            Console.WriteLine("Area of Circle   = {0:F2}", circle.Area());
+            Console.WriteLine("Area of Sphere   = {0:F2}", sphere.Area());
+            Console.WriteLine("Area of Cylinder = {0:F2}", cylinder.Area());
+            Console.WriteLine("Area of Rectangle = {0:F2}", rectangle.Area());
         }
 
         static void DrawObject(IDrawObject obj)
