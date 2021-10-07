@@ -12,6 +12,8 @@ namespace Singleton
         void WriteToLog(string logInfo);
     }
 
+
+    // eager loading singleton
     public class LoggingClass : ILogger
     {
         private static LoggingClass instance = new LoggingClass();
@@ -34,6 +36,30 @@ namespace Singleton
         public void WriteToLog(string logInfo)
         {
 
+        }
+    }
+
+
+    // lazy loading Singleton
+    public class BossCreature
+    {
+
+        private static BossCreature instance;
+
+        // constructor
+        private BossCreature() { }
+
+        public static BossCreature Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new BossCreature();
+                }
+
+                return instance;
+            }
         }
     }
 

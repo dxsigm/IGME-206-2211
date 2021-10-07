@@ -17,18 +17,48 @@ namespace SongApp
             CDSong cdSong = new CDSong();
             cdSong.Name = "Bridge Over Troubled Water";
 
+            Game chess = new Game();
+            chess.Name = "chess";
+
             List<Song> songList = new List<Song>();
             songList.Add(tapeSong);
             songList.Add(cdSong);
 
-            SortedList<string, object> songGameSortedList = new SortedList<string, object>();
-            songGameSortedList[tapeSong.Name] = tapeSong;
-            songGameSortedList[cdSong.Name] = cdSong;
-            songGameSortedList["david"] = "david schuh";
 
-            Game chess = new Game();
-            chess.Name = "chess";
-            songGameSortedList[chess.Name] = chess;
+
+            //songList[0]
+            //songList[1]
+
+            SortedList<string, IPlay> songSortedList = new SortedList<string, IPlay>();
+            
+            songSortedList[tapeSong.Name] = tapeSong;
+            songSortedList[cdSong.Name] = cdSong;
+            songSortedList[chess.Name] = chess;
+
+            foreach(KeyValuePair<string,IPlay> keyValuePair in songSortedList)
+            {
+                //if( keyValuePair.Value is TapeSong)
+                if( keyValuePair.Value.GetType() == typeof(TapeSong))
+                {
+                    TapeSong tSong = (TapeSong)keyValuePair.Value;
+                    Console.WriteLine($"Key = {keyValuePair.Key}   SongName = {tSong.Name}  Tape Side: {tSong.side}");
+
+                }
+                else
+                {
+                    CDSong cSong = (CDSong)keyValuePair.Value;
+                    Console.WriteLine($"Key = {keyValuePair.Key}   SongName = {keyValuePair.Value.Name}");
+                }
+                
+            }
+
+
+
+
+            //songGameSortedList["david"] = "david schuh";
+
+            
+            //songGameSortedList[chess.Name] = chess;
 
             chess.Play();
             tapeSong.Play();
@@ -43,7 +73,7 @@ namespace SongApp
 
         }
 
-        public static void PlayThisObject(object obj)
+        public static void PlayThisObject(IPlay obj)
         {
             if( obj.GetType() == typeof(VinylSong))
             {

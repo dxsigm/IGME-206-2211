@@ -1,4 +1,4 @@
-﻿#define EXE_BUILD
+﻿//#define EXE_BUILD
 
 using System;
 using System.Collections.Generic;
@@ -115,7 +115,7 @@ namespace GameOfLife
             int nIniRows = 0;
 
 #if EXE_BUILD
-            Console.WriteLine("Enter initial state fo the organism (1=alive,sp(0)=dead): ");
+            Console.WriteLine("Enter initial state of the organism (1=alive,sp(0)=dead): ");
 
             do
             {

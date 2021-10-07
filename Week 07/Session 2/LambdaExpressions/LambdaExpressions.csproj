@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{716E0961-583C-4B84-994C-DCF66F49B812}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>GameOfLife</RootNamespace>
-    <AssemblyName>GameOfLife</AssemblyName>
+    <ProjectGuid>{ADDED86E-EBAB-4C44-8132-18C7F866CE2B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LambdaExpressions</RootNamespace>
+    <AssemblyName>LambdaExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,9 +31,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
