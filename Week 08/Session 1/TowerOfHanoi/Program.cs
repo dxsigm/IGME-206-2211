@@ -8,10 +8,13 @@ namespace TowerOfHanoi
 {
     class Program
     {
+        // a post Dictionary to reference each stack of disks
         static Dictionary<string, Stack<int>> post = new Dictionary<string, Stack<int>>();
 
+        // a queue of a 2d string array to store each move (source post, destination post)
         static Queue<string[]> _autoMoves = new Queue<string[]>();
 
+        // a counter for the current turn #
         static int nTurn;
 
         static void Main(string[] args)
@@ -30,11 +33,12 @@ namespace TowerOfHanoi
             Console.Write("Autosolve (Y/N): ");
             string autoSolve = Console.ReadLine();
 
-
+            // put a "floor" on each post since extra code is needed for accessing empty stacks
             post["A"].Push(nDisks + 1);
             post["B"].Push(nDisks + 1);
             post["C"].Push(nDisks + 1);
 
+            // put nDisks on post A
             int nCntr = nDisks;
             while( nCntr > 0)
             {
@@ -42,9 +46,16 @@ namespace TowerOfHanoi
                 --nCntr;
             }
 
+            if (autoSolve.ToLower().StartsWith("y"))
+            {
+                // call the recursive method to fill the autosolve queue
+                GameSolver(nDisks, "A", "B", "C");
+            }
+
             string srcPost = null;
             string destPost = null;
 
+            // while all the disks are not on post C
             while( post["C"].Count != nDisks + 1)
             {
                 PrintPosts(nDisks);
@@ -53,8 +64,7 @@ namespace TowerOfHanoi
 
                 if( autoSolve.ToLower().StartsWith("y"))
                 {
-                    GameSolver(nDisks, "A", "B", "C");
-
+                    // get the next move from the queue
                     string[] sMove = _autoMoves.Dequeue();
                     srcPost = sMove[0];
                     destPost = sMove[1];
@@ -117,10 +127,12 @@ namespace TowerOfHanoi
 
         static void GameSolver(int nDisks, string from, string spare, string to)
         {
+            string[] move;
+
             // base case
             if( nDisks == 1 )
             {
-                string[] move = { from, to };
+                move = new string[]{ from, to };
                 _autoMoves.Enqueue(move);
 
                 return;
@@ -129,8 +141,9 @@ namespace TowerOfHanoi
             // move the remaining disks from A to C using B as spare
             GameSolver(nDisks - 1, from, to, spare);
 
-            string[] move1 = { from, to };
-            _autoMoves.Enqueue(move1);
+            // store the current move in the queue
+            move = new string[]{ from, to };
+            _autoMoves.Enqueue(move);
 
             // move the remaining disks from B to C using A as spare
             GameSolver(nDisks - 1, spare, from, to);
