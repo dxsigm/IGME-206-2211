@@ -138,7 +138,7 @@ namespace TowerOfHanoi
                 return;
             }
 
-            // move the remaining disks from A to C using B as spare
+            // move the remaining disks from A to B using C as spare
             GameSolver(nDisks - 1, from, to, spare);
 
             // store the current move in the queue
