@@ -158,7 +158,10 @@ namespace LinkedList
             LinkedList<object> linkedList = new LinkedList<object>();
 
             // 2. Your code here
-
+            for( int i = 1; i <= 10; ++i)
+            {
+                linkedList.AddLast(i);
+            }
 
             // 3. then call the visualizer
             VisualizeLinkedList visualizeLinkedList = new VisualizeLinkedList(linkedList);
