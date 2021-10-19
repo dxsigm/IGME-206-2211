@@ -22,11 +22,21 @@ namespace Property
         {
             get
             {
-                return Name;
+                // this will create an infinitely recursive property
+                // since referencing Name calls Name.get
+                //return Name;
+
+                // return the private name field
+                return name;
             }
 
             set
             {
+                // this will create an infinitely recursive property 
+                // since referencing Name with the equal operator calls Name.set
+                //Name = value;
+
+                // set the private name field to the operand
                 name = value;
             }
         }
