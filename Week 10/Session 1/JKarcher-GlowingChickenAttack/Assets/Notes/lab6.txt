@@ -1,0 +1,4 @@
+1. Add a "Start Game" scene(done) which includes a flashy intro screen(done), Start and Exit buttons(done), and the instructions for how to play the game(done).
+2. Add a flashy "Level Up" scene which plays each time the player levels up(done).
+3. Add a "Play Again" button to the Game Over scene.(done)
+4. Submit the zipped assets

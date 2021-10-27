@@ -1,0 +1,39 @@
+vid3
+Deactivate soundtrack
+	- when we die change soundtrack
+	- dirt(already deactivated)
+	- death Anim(already implemented)
+	- death smoke(already inplemented)
+	- crash sound on death
+throw pizza(already implemented)
+	-animation still needed (not implemented in vid yet, will wait)
+Camera Follow player
+	- move left and right at same rate as player
+	- y and z is same
+food detect collison(already implemented)
+animal detect collision(already implemented)
+animal varied speed(already implemented)
+level
+	-reload same scene
+	-keep same score
+	-keep same level
+	-keep same food count
+	-level up after all pizzas are thrown and the last one has been destroyed
+	-using Dont destrow in load
+	-LevelUp() increase animal spawn rate, level++, pizza to 10, reloadScene
+spawn rate
+	-Max is .1
+	-.2 down per level
+gameOver
+	-checks to prevent movement(already implemented)
+
+Note: 	Space is bound to fire 1 as of v2
+		-check comment on jump to make sure I removed space from the jump options
+	-animals are the only ones that collision detect. player and food dont collide with anything else
+	-im starting to have too many different local things called player, its time to clean up some of the scripts
+	-for dont destroy on load i dont have a score object, i can add player controler to dont destroy on load 
+		-or just make player in player controler static for same result
+		-decided to just make a single static player object in a new class M_Player
+
+bug: can still throw pizza when in the air
+fix: added a grounded check to throw

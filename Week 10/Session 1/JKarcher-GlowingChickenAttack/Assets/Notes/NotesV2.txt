@@ -1,0 +1,46 @@
+video covers
+- instatiation of food
+	-probably also going to go with pizza becouse pizza
+	-recomended scale up
+	-no grav drop
+	-move forward at 40f
+	-rotates right at delta * 500
+	-destroy at far end
+	-only one can exist at a time
+	-max limit of 10
+-instatiation of animals
+	-doe fox moose used, can be anything, colorfull giant chickens might be funny, attack of the chocobo
+	-probably going to use diferent tags of slow med and fast instead of searching name
+	-speed is 40
+	-not sure if there is a performance diference between empty navmesh and just flying through space, minimal if their is
+	-target pos is 5 behind the player
+	-destroy at close end
+-spawner
+	-use a standard spawner for animals
+	-invoke repeating wait 2s repeat 1.5s
+-score keeper
+	-just stores variabls at this point
+	-food count
+	-fast = 1, faster = 2, fastest = 3
+	-level will be scaler for rate of spawn
+-collisions
+	-destroy food
+	-set animal collider to false
+	-animal run random away
+-plyer explosion
+	--controled by bool called gameover
+
+
+Note: probably gong to use on collision enter then check tag instead of trigger
+      -personal pref to AI navMesh
+      -ground is now static
+      -animals need a rigidbody and navMesh agent added
+      -added most score keeper functionality to player class
+      -abandoned invoke repeating since i cant stop the spawning after i die
+      -I have already implemented the death smoke and animation
+
+bug: cant stop animals from spawning after death
+fix: once invoked you cant uninvoke, using my own timer i have more control
+
+bug: dirt still flys after death if moving when die
+fix: logic error, since dirt loops i still need to check if its playing when i die and then turn it bcak off

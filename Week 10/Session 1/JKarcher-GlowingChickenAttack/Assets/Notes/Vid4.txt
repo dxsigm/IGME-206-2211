@@ -1,0 +1,39 @@
+Vid 4
+Game Over
+	-seperate scene
+	-base text output
+	-using plane for screene overlay
+	-used base text
+	-game over shows level and score
+	-play again button
+	-has exit button
+	-assigns the button listener through script
+Movement
+	-remove the ability to change direction while in the air
+	-final binding
+		-mouse move in direction
+		-LC in throw food
+		-space is jump
+	-all keybord is commented
+	-uses screen to world point
+	-screen to world Mx,My,camz(-1)
+	-convert to (sTW.x, pTran.y, pTran.z)
+	-want a dead zone of 5
+	-normalized movement
+	-same rotation system
+	-same jump system
+	-check to see if fire 1 is ste to LC
+	-froze rotate x and z, pos z (already done)
+	
+Notes:  -TMPro for ever
+	-Ill use a ui panel for the backdrop
+	-I plan to use the gui on-click listener
+	-I dont like the screen snap to defult or how long the smoke seems to have stoped before it is officially done
+		-ill leave it for now since last assignment is to change the start levelup and game over anyway
+
+bug: scene is reloaded, no errors, no movement, no spawning
+fix: i forgot to set the game over trigger back to false when the game can continue
+
+bug: player controler, to stop the player from reorienting themselves in the air i stoped checking for a new position for target
+		-results in player jumping to target but never past
+fix: when in the air i reset the target to infinity and (-)infinity depending on the orientation at the time of jump so the player can never reach target

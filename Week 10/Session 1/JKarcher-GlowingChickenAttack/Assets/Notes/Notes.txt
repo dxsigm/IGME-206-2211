@@ -1,0 +1,61 @@
+lab vid1 notes
+
+Lab Video covers
+- asset Import
+- guide of window a/ gizmo use
+- collision detection
+- gravity overview
+- movemnt positive a/ negative x via Translate
+- movement boundarys
+- animation transitions
+- rotation toword diretion
+- particle effect play a/ stop
+- sounds play a/ stop
+- jump via AddForce
+- player prefab
+
+Dont see specific rubric saying code must be exact to video just same resulting game... that works, a/ code is readable
+
+final vid1 contains - background music
+					- jump sound
+					- movement a/ orientation w/ L/R arrows
+					- jump w/ up arrow
+					- land w/ gravity
+					- collision detection w/ ground
+					- appropriat animation changes depending on state
+
+-need to remenber my changes so list of diviation for comment here
+
+added: player class to hold all player based functions, anims, a/ data
+
+collision detect - i dont yet see a reason why the ground needs a rig
+movement - Im going to use rig.movePos to maintian one move system a/ better collision detect for when animals collide instead of translate
+		 - freeze all rotate on player, explicit in script so not nessisary for physics to change them
+		 - freeze z no reason for player to move z intentionally or axidentally
+		 - ill leave bug fix in, w/ rotate freeze its not nessissary but vid2 might ask to remove freeze later for some reason so its a back up
+boundarys - ill use gameObj renderer to tell me how big the ground is the /2 + buffer dist bec final is center z oriented
+animation - changed transitions to min given snap movement system... personal pref
+		  - i removed almost every has exit time in jumping layer. since i want to be able to interupt an animation
+		  - i reduced every used transition to near instant since we dont use a landing transition or build speed we... just go speed, a/ the overall game play is benefited by rapid change in state
+		  - i removed looping on standing a/ running jump, this also removed it on walking blend tree
+		  - i added a falling parameter a/ state so i dont reset to run state when i change dorection in the air
+		  - "Falling" is static so reset w/ bool is irrelevent
+rotation - used euler main instead of Quint, easier to read in inspector if somthing goes wrong, dont have to set the dirt rotate since dirt is child of player
+particle - left looping a/ just check if playing.
+jump - moved ground to new layermask = ground
+	 - raycast short distance to see if i am on the ground
+	 - timmer to prevent double press
+	 - added w a/ uparrow to jump button since thats what its set to at end of vid... i think final project used space
+	 - used jump button for jump trigger
+
+note: another studednt mentioned a bug he found
+bug: player drift positive xz
+fix: normal physic mat fix works, also freeze xz rotate seems to work 
+
+bug: double jump
+fix: switch from checking for vertical axis to checking jump button
+	 - added timer for insurance
+
+bug: double expected jump height
+fix: I left behind vertical check when I switched to jump button, player Move() just scaled input
+	 -I removed all verticle checks.
