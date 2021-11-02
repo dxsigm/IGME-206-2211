@@ -33,7 +33,7 @@ We will assess all of this work with in-class exercises, homework, projects, and
 - Unit 2 (weeks 4-6): Object Oriented Programming (textbook chapters 8-11, pdf and ppt documents, schUML documentation)
 - Unit 3 (weeks 7-12): Data Structures (pdf and ppt documents)
 - Unit 4 (weeks 13-15): Data Oriented Programming (pdf and ppt documents)
-- In-class Final Project Presentations Last Lecture in Week 15 (Dec 2nd)
+- Final Project Presentations during scheduled final exam time: Tuesday Dec 14, 1:30pm - 4pm
 
 ## Course Materials and Communication
 _Beginning C#_ by Karli Watson, et al.
