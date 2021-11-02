@@ -12,6 +12,35 @@ namespace CoinFlipGame
     {
         // if we represent each vertex as a 3 bit number, where H=1 and T=0, then there are 8 states of the coins
         // adjacency matrix representation
+
+#if DIGRAPH
+        // the adjacency values for the directed graph version.  
+        // Only allow the paths that reach the goal
+        static bool[,] mGraph = new bool[,]
+        {
+           { false   , true    , false   , false   , true    , false   , false   , false },
+           { false   , false   , false   , true    , false   , false   , false   , false },
+           { true    , false   , false   , false   , false   , false   , false   , false },
+           { false   , false   , false   , false   , false   , false   , false   , true },
+           { false   , false   , false   , false   , false   , false   , true    , false },
+           { false   , false   , false   , false   , false   , false   , false   , false },
+           { false   , false   , false   , false   , false   , false   , false   , true },
+           { false   , false   , false   , false   , false   , true    , false   , false }
+        };
+
+        static int[][] lGraph = new int[][]
+        {
+            new int[] { 1, 4 },
+            new int[] { 3 },
+            new int[] { 0 },
+            new int[] { 7 },
+            new int[] { 6 },
+            null,
+            new int[] { 7 },
+            new int[] { 5 }
+        };
+
+#else
         // the matrix shows whether you can pass from a row node to a column node
         static bool[,] mGraph = new bool[,]
         {            /* TTT */ /* TTH */ /* THT */ /* THH */ /* HTT */ /* HTH */ /* HHT */ /* HHH */
@@ -36,6 +65,7 @@ namespace CoinFlipGame
             /* HHT */ new int[] { 4, 7 },    /* HTT, HHH */
             /* HHH */ new int[] { 3, 5, 6 }  /* THH, HTH, HHT */
         };
+#endif
 
         // We could also implement our adjacencies using many other data structures for example a SortedList based on tuples of the (source,target) nodes
         SortedList<(string, string), bool> sGraph = new SortedList<(string, string), bool>();
