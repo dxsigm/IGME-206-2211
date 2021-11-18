@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Net;
 using System.IO;
+using System.Timers;
 
 namespace DontDie
 {
@@ -144,42 +145,65 @@ namespace DontDie
             /*H*/ null
         };
 
+        static Random rand = new Random();
+
+        static Timer timer;
+        static bool bTimedOut;
 
         static void Main(string[] args)
         {
             int nRoom = 0;
 
-            int playerHp = 1;
+            int playerHp = 4;
 
             string[] desc = new string[]
             {
-                "room a desc",
-                "room b desc",
-                "room c desc",
-                "room d desc",
-                "room e desc",
-                "room f desc",
-                "room g desc",
-                "room h desc"
+                "room A desc",
+                "room B desc",
+                "room C desc",
+                "room D desc",
+                "room E desc",
+                "room F desc",
+                "room G desc",
+                "room H desc"
             };
 
+            string[] randomInjuryDesc = new string[]
+            {
+                "you tripped",
+                "you stubbed your toes",
+                "you hit your head",
+                "a bat bit you",
+                "a rock fell on your head"
+            };
+
+
+            // nRoom keeps track of which room the player is in A=0, H=7
+            // while not in room H (the exit)
             while (nRoom != 7)
             {
-                // if not room A (0) and not room H (7) then randomly reduce their HP such that they don't die
 
                 // display a desc of the room
-                // Console.Writeline(desc[nRoom]);
+                Console.WriteLine(desc[nRoom]);
 
                 // display any exits from the room
+                // the neighbors of the current room are stored as an array of tuples
+                // storing the neighbor index (0-7), the available direction (eg. "N"), and the cost of the exit
+                // fetch the array of neighbors for the current room
                 (int, string, int)[] thisRoomsNeighbors = listGraph[nRoom];
 
                 int nExits = 0;
 
+                // check each neighbor of the current room to see if it's available
                 foreach ((int, string, int) neighbor in thisRoomsNeighbors)
                 {
+                    // if the player's HP is greater than the cost of the exit
                     if (playerHp > neighbor.Item3)
                     {
-                        Console.WriteLine("There is an exit to the " + neighbor.Item2 + " which costs " + neighbor.Item3 + "HP");
+                        // display the exit
+                        Console.WriteLine("There is an exit to the " + neighbor.Item2 + " which costs " + neighbor.Item3 + " HP");
+
+                        // count how many exits are available
                         ++nExits;
                     }
                 }
@@ -188,30 +212,75 @@ namespace DontDie
                 Console.WriteLine($"You have {playerHp} HP");
 
                 // ask the player if they want wager (w) for more hp or leave (l) the room only if there are nExits > 0
-                string sResponse;
+                string sResponse = null;
 
-                sResponse = Console.ReadLine();
+                // if there are exits available
+                if( nExits > 0 )
+                {
+                    while( sResponse != "l" && sResponse != "w")
+                    {
+                        // prompt for w or l
+                        Console.Write("Would you like to wager for more health or leave the room? ");
 
+                        // grab the first character and lowercase it
+                        sResponse = Console.ReadLine().ToLower()[0].ToString();
+                    }
+                }
+                else
+                {
+                    // they need to wager, there are no exits
+                    sResponse = "w";
+                }
+                
+
+                // if leaving room
                 if (sResponse.ToLower() == "l" /* leaving room */ )
                 {
+                    // initialize that the direction is invalid
                     bool bValid = false;
                     string sDirection;
 
                     while (!bValid)
                     {
-                        sDirection = Console.ReadLine().ToUpper();
+                        Console.Write("Which direction (N/S/E/W): ");
 
+                        // read the first char of the direction
+                        sDirection = Console.ReadLine().ToUpper()[0].ToString();
+
+                        // check each neighbor of the current room
+                        // (check each column of the current row of the adjacency matrix)
+                        // array.GetLength(N) gets the size of the N'th dimension of the array
                         for (int nCntr = 0; nCntr < rectMatrixGraph.GetLength(1); ++nCntr)
                         {
+                            // ensure the direction is valid
+                            // the column is the room index (0-7), Item1 contains the valid directions, Item2 is the cost
                             if (rectMatrixGraph[nRoom, nCntr].Item1 != null && rectMatrixGraph[nRoom, nCntr].Item1.Contains(sDirection) && playerHp > rectMatrixGraph[nRoom, nCntr].Item2)
                             {
-                                nRoom = nCntr;
-                                playerHp -= rectMatrixGraph[nRoom, nCntr].Item2;
+                                // indicate they chose a valid direction
                                 bValid = true;
+
+                                // deduct the HP
+                                playerHp -= rectMatrixGraph[nRoom, nCntr].Item2;
+
+                                // move to the room
+                                nRoom = nCntr;
+
+                                // if not room A (0) and not room H (7) then randomly reduce their HP such that they don't die
+                                if (nRoom != 0 && nRoom != 7)
+                                {
+                                    Console.WriteLine(randomInjuryDesc[rand.Next(randomInjuryDesc.Length)]);
+
+                                    int nHpLoss = rand.Next(playerHp);
+
+                                    Console.WriteLine($"You lost {nHpLoss} health.");
+                                    playerHp -= nHpLoss;
+                                }
+
                                 break;
                             }
                         }
 
+                        // indicate invalid direction chosen
                         if (!bValid)
                         {
                             Console.WriteLine("That isn't a valid direction");
@@ -220,6 +289,8 @@ namespace DontDie
                 }
                 else
                 {
+                    // otherwise grinding for HP
+
                     // trivia question
                     // fetch api
                     // 15 second limit to answer
@@ -251,20 +322,73 @@ namespace DontDie
                         trivia.results[0].incorrect_answers[i] = HttpUtility.HtmlDecode(trivia.results[0].incorrect_answers[i]);
                     }
 
-                    // put the answers in random order
-                    // prefix each answer with number 1-4 so the player only needs to type the number
+                    // prompt for wager amount
+                    string sWager = null;
+                    int nWager = 0;
+
+                    do
+                    {
+                        Console.Write("Enter how much of your HP to wager: ");
+                        sWager = Console.ReadLine();
+                    } while( !int.TryParse(sWager, out nWager) || (nWager < 0) || (nWager > playerHp) );
+
+                    // ask question
+                    Console.WriteLine(trivia.results[0].question);
+
+                    // choose random answer spot
+                    int nAnswer = rand.Next(trivia.results[0].incorrect_answers.Count + 1);
+                    int nWrongCntr = 0;
+
+                    // output the correct answer in random position
+                    // prefix each with 1-N to allow player to answer with N
+                    for(int i = 0; i < trivia.results[0].incorrect_answers.Count + 1; ++i)
+                    {
+                        if( i == nAnswer )
+                        {
+                            // if this is the correct answer to show
+                            Console.WriteLine($"{i + 1}: {trivia.results[0].correct_answer}");
+                        }
+                        else
+                        {
+                            // show the incorrect answers
+                            Console.WriteLine($"{i + 1}: {trivia.results[0].incorrect_answers[nWrongCntr]}");
+                            ++nWrongCntr;
+                        }
+                    }
+
+                    // increment the answer to be 1-based instead of 0-based
+                    ++nAnswer;
+
                     // 15 second timer
+                    timer = new Timer(15000);
 
-                    // if wrong answer or time expires
-                    // tell them the right answer
-                    // subtract their bet from their HP
-                    // if their hp == 0 then game over
+                    // use an anonymous method via a lambda expression to catch the lapsed timer event
+                    timer.Elapsed += (o, e) => { bTimedOut = true; timer.Stop(); Console.WriteLine("Time's up. Press enter."); };
 
-                    // if answer correct, then increase their HP by their wager
+                    timer.Start();
 
+                    Console.Write("==> ");
+                    string sAnswer = Console.ReadLine();
 
+                    timer.Stop();
+
+                    sAnswer = nAnswer.ToString();
+
+                    // if an incorrect answer
+                    if ( sAnswer != nAnswer.ToString() || bTimedOut )
+                    {
+                        Console.WriteLine($"Wrong!  The answer was {nAnswer}.");
+                        playerHp -= nWager;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Correct! You are stronger!");
+                        playerHp += nWager;
+                    }
                 }
             }
+
+            Console.WriteLine($"You escaped the maze with {playerHp} HP!");
         }
     }
 }
